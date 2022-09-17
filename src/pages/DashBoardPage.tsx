@@ -21,7 +21,7 @@ const ProjectShowContainer = styled(Box)`
   border: 1px solid green;
   margin-top: 5px;
   margin-bottom: 5px;
-  height: 800px;
+  /* height: 800px; */
   border-radius: 6px;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 `;

@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./services/auth.context";
+import { ProjectsContextProvider } from "./services/Projects/Projects.context";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -13,7 +14,9 @@ root.render(
   // <React.StrictMode>
   <BrowserRouter>
     <AuthContextProvider>
-      <App />
+      <ProjectsContextProvider>
+        <App />
+      </ProjectsContextProvider>
     </AuthContextProvider>
   </BrowserRouter>
   // </React.StrictMode>

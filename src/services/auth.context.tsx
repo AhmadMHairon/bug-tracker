@@ -1,63 +1,63 @@
 import React, { useState, createContext, useEffect } from "react";
 import { login, register, fetchUser } from "./auth.services";
 
-type authUserProps = {
-  access_token?: string;
-  email?: string;
-  name?: string;
-  id?: string;
-};
+interface authUserProps {
+  access_token: string;
+  name: string;
+  admin: boolean;
+}
 
-type authContextProps = {
-  authUser?: authUserProps | null;
-  loginUser: (email: string, password: string) => Promise<void>;
+interface authContextProps {
+  authUser: authUserProps | null;
+  loginUser: (data: loginProps) => Promise<void>;
   logoutUser: () => void;
   registerUser: (data: registerProps) => Promise<void>;
   isLoading: boolean;
-};
+}
 
-type registerProps = {
+interface registerProps {
   email: string;
   password: string;
   name: string;
-};
+}
+
+interface loginProps {
+  email: string;
+  password: string;
+}
+
+interface Props {
+  children: React.ReactNode;
+}
 
 export const AuthContext = createContext<authContextProps | null>(null);
 
-type Props = {
-  children: React.ReactNode;
-};
-
 export const AuthContextProvider = ({ children }: Props) => {
-  const [authUser, setAuthUser] = useState({});
+  const [authUser, setAuthUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const loginUser = async (email: string, password: string) => {
-    // setIsLoading(true);
-    try {
-      const res = await login(email, password);
 
-      setAuthUser({ ...res, email });
+  const loginUser = async (data: loginProps) => {
+    try {
+      const res = await login(data);
+      setAuthUser({ ...res });
       localStorage.setItem("token", res.access_token);
     } catch (e) {
       console.log("error", e);
     }
-    // setIsLoading(false);
   };
+
   const logoutUser = () => {
-    setAuthUser({});
+    setAuthUser(null);
     localStorage.removeItem("token");
   };
 
   useEffect(() => {
     const fetcher = async () => {
       setIsLoading(true);
-
       const token = localStorage.getItem("token");
-      console.log(token);
       if (token) {
         try {
           const res = await fetchUser(token);
-          console.log("hey", { ...res.data });
           setAuthUser({ ...res.data, access_token: token });
         } catch (e) {
           console.log("error", e);
@@ -69,7 +69,6 @@ export const AuthContextProvider = ({ children }: Props) => {
   }, []);
 
   const registerUser = async (data: registerProps) => {
-    console.log("Hey");
     try {
       const res = await register(data);
       setAuthUser({ ...res, email: data.email });
@@ -82,7 +81,7 @@ export const AuthContextProvider = ({ children }: Props) => {
   return (
     <AuthContext.Provider
       value={{
-        authUser: authUser,
+        authUser,
         loginUser,
         logoutUser,
         registerUser: registerUser,

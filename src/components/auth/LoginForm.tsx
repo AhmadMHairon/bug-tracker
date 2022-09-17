@@ -34,7 +34,7 @@ const LoginForm = () => {
 
   const loginHandler = async (data: any) => {
     console.log(data);
-    await auth?.loginUser(data.email, data.password);
+    await auth?.loginUser(data);
   };
 
   return (
