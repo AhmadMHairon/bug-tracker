@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { emailValidator } from "./validators/validator";
-import { AuthContext } from "../../services/auth.context";
+import { AuthContext } from "../../services/Auth/Auth.context";
 
 const Container = styled(Box)`
   flex: 1;

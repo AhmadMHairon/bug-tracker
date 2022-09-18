@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { Box, Typography, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Container = styled(Box)`
   border: 1px solid red;
@@ -80,6 +81,10 @@ const ProjectExtra = styled(Box)`
   align-items: center;
 `;
 
+const MyLink = styled(Link)`
+  text-decoration: none;
+`;
+
 const ProjectItemContainer = ({ project }: any) => {
   return (
     <Container>
@@ -94,10 +99,8 @@ const ProjectItemContainer = ({ project }: any) => {
             ></img>
           </ImageContainer>
           <TitleDesContainer>
-            <Title>Project Name</Title>
-            <Description>
-              Description dkjsakjdsalkjd sadlkjs ajdklsajlfdkjaldksaj
-            </Description>
+            <Title>{project.name}</Title>
+            <Description>{project.description}</Description>
           </TitleDesContainer>
         </ProjectDetails>
         <RoleContainer>
@@ -106,9 +109,11 @@ const ProjectItemContainer = ({ project }: any) => {
       </ProjecDetailsContainer>
       <UrgentToken>Urgent</UrgentToken>
       <ProjectExtra>
-        <Button variant="contained" color="error">
-          View Project
-        </Button>
+        <MyLink to={`projects/${project.id}`}>
+          <Button variant="contained" color="error">
+            View Project
+          </Button>
+        </MyLink>
       </ProjectExtra>
     </Container>
   );

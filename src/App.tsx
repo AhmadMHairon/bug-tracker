@@ -11,6 +11,7 @@ import UsersPage from "./pages/UsersPage";
 import AdminsPage from "./pages/AdminsPage";
 import SettingsPage from "./pages/SettingsPage";
 import ProfilePage from "./pages/ProfilePage";
+import ProjectDetailPage from "./pages/ProjectDetailPage";
 
 function App() {
   const theme = createTheme({
@@ -45,6 +46,10 @@ function App() {
               <Route path="admins" element={<AdminsPage></AdminsPage>} />
               <Route path="settings" element={<SettingsPage></SettingsPage>} />
               <Route path="profile" element={<ProfilePage></ProfilePage>} />
+              <Route
+                path="projects/:id"
+                element={<ProjectDetailPage></ProjectDetailPage>}
+              />
             </Route>
           </Route>
           <Route

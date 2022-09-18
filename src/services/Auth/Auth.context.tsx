@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect } from "react";
-import { login, register, fetchUser } from "./auth.services";
+import { login, register, fetchUser } from "./Auth.service";
 
 interface authUserProps {
   access_token: string;

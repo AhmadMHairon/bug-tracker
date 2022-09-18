@@ -1,10 +1,16 @@
 import axios from "axios";
+import { baseURL } from "../../components/utils/baseURL";
 
-const baseURL =
-  "https://3404-2001-16a2-ce63-9900-14b9-fe82-ff2b-eafa.eu.ngrok.io";
-
-export const serviceFetchProject = async (id?: string) => {
-  const res = await axios.get(`${baseURL}/api/projects/${id}`);
+export const serviceFetchProject = async (
+  id: string,
+  access_token?: string
+) => {
+  const res = await axios.get(`${baseURL}/v1/projects/show/${id}`, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+    withCredentials: true,
+  });
   return res.data;
 };
 
@@ -16,7 +22,7 @@ export const serviceCreateScene = async (
   },
   id?: string
 ) => {
-  const res = await axios.post(`${baseURL}/api/projects/${id}/scene`, data);
+  const res = await axios.post(`${baseURL}/projects/${id}/scene`, data);
   return res.data;
 };
 
@@ -28,7 +34,7 @@ export const serviceAssignMember = async (
   id?: string
 ) => {
   const res = await axios.post(
-    `${baseURL}/api/projects/${id}/assign-member/`,
+    `${baseURL}/projects/${id}/assign-member/`,
     data
   );
   return res.data;

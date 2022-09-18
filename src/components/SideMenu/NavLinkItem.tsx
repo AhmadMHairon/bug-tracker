@@ -46,9 +46,16 @@ const IconHolder = styled(Box)`
   margin-right: 12px;
 `;
 
+interface Person {
+  dashboard: any;
+  users: any;
+  admins: any;
+  settings: any;
+  profile: any;
+}
+
 const NavLinkItem = ({ name }: PropsTypes) => {
   const location = useLocation();
-  console.log("location", location);
   const searcher: Person = {
     dashboard: <HomeIcon />,
     users: <GroupIcon />,
@@ -57,17 +64,7 @@ const NavLinkItem = ({ name }: PropsTypes) => {
     profile: <AccountBoxIcon />,
   };
 
-  type Person = {
-    dashboard: any;
-    users: any;
-    admins: any;
-    settings: any;
-    profile: any;
-  };
-
   const str = name.toLowerCase() as string;
-
-  console.log(name);
 
   return (
     <MyLink to={`${name.toLowerCase() === "dashboard" ? "" : name}`}>

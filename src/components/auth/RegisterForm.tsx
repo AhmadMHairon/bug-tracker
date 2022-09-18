@@ -3,7 +3,7 @@ import { Box, Typography, TextField, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../../services/auth.context";
+import { AuthContext } from "../../services/Auth/Auth.context";
 import { emailValidator, passWordValidator } from "./validators/validator";
 
 const Container = styled(Box)`

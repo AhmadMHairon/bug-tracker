@@ -4,8 +4,9 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { AuthContextProvider } from "./services/auth.context";
+import { AuthContextProvider } from "./services/Auth/Auth.context";
 import { ProjectsContextProvider } from "./services/Projects/Projects.context";
+import { ProjectDetailsContextProvider } from "./services/ProjectDetails/ProjectDetails.context";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,7 +16,9 @@ root.render(
   <BrowserRouter>
     <AuthContextProvider>
       <ProjectsContextProvider>
-        <App />
+        <ProjectDetailsContextProvider>
+          <App />
+        </ProjectDetailsContextProvider>
       </ProjectsContextProvider>
     </AuthContextProvider>
   </BrowserRouter>

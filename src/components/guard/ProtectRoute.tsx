@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../../services/auth.context";
+import { AuthContext } from "../../services/Auth/Auth.context";
 import FullScreenProgress from "../Spinners/FullScreenProgress";
 import { Navigate, Outlet } from "react-router-dom";
 

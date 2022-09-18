@@ -1,7 +1,8 @@
 import axios from "axios";
+// import { baseURL } from "../components/utils/baseURL";
 
 const baseURL =
-  "https://3404-2001-16a2-ce63-9900-14b9-fe82-ff2b-eafa.eu.ngrok.io";
+  "https://0283-2001-16a2-de2d-2500-edec-addf-3caf-2e6e.in.ngrok.io";
 
 interface loginProps {
   email: string;
@@ -23,6 +24,7 @@ export const login = async (data: loginProps) => {
 };
 
 export const fetchUser = async (token: string) => {
+  console.log("Bearer " + token);
   const res = await axios.get(`${baseURL}/api/my-profile`, {
     headers: {
       Authorization: "Bearer " + token,

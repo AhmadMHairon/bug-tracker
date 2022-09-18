@@ -4,7 +4,7 @@ import { Box, Button } from "@mui/material";
 import Logo from "./Logo";
 import NavLinkItem from "./NavLinkItem";
 import { Outlet } from "react-router-dom";
-import { AuthContext } from "../../services/auth.context";
+import { AuthContext } from "../../services/Auth/Auth.context";
 
 const Container = styled(Box)`
   width: 100vw;
@@ -32,7 +32,7 @@ const OutletContainer = styled(Box)`
   border: 1px solid red;
 `;
 
-const SideMenu = ({ children }: any) => {
+const SideMenu = () => {
   const authUser = useContext(AuthContext);
 
   const items = ["DashBoard", "Users", "Admins", "Settings", "Profile"].map(
