@@ -1,7 +1,7 @@
 import axios from "axios";
 import { baseURL } from "../../components/utils/baseURL";
 
-export const serviceFetchProject = async (
+export const fetchProjectDetails = async (
   id: string,
   access_token?: string
 ) => {

@@ -29,7 +29,7 @@ const SideBarHolder = styled(Box)`
 const OutletContainer = styled(Box)`
   /* width: 100%; */
   flex: 1;
-  border: 1px solid red;
+  padding: 10px;
 `;
 
 const SideMenu = () => {

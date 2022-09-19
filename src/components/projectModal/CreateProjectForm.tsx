@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import { Box, Typography, TextField, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { ProjectsContext } from "../../services/Projects/Projects.context";
+import { createNewProject } from "../../services/Projects/Projects.service";
 
 const Contianer = styled(Box)`
   height: 100%;
@@ -25,17 +25,7 @@ const SubmitContianer = styled(Box)`
   align-items: center;
 `;
 
-const CreateProjectForm = () => {
-  const project = useContext(ProjectsContext);
-
-  const submitHandler = (data: any) => {
-    project?.CreateProject({
-      name: data.name,
-      image: data.image[0],
-      description: data.description,
-    });
-  };
-
+const CreateProjectForm = ({ submitHandler }: any) => {
   const {
     register,
     formState: { errors },

@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { Box } from "@mui/material";
 import ProjectItemContainer from "./ProjectItemContainer";
-import { ProjectsContext } from "../../services/Projects/Projects.context";
-import { fetchUserProjects } from "../../services/Projects/Projects.service";
 
 const Container = styled(Box)`
   border: 1px solid green;
@@ -11,17 +9,15 @@ const Container = styled(Box)`
   height: fit-content;
 `;
 
-const ProjectList = () => {
-  const Projects = useContext(ProjectsContext);
+interface ProjectProps {
+  image: any;
+  name: string;
+  description: string;
+  id: string;
+}
 
-  useEffect(() => {
-    const fetcher = async () => {
-      const data = await fetchUserProjects();
-      Projects?.setProjects(data);
-    };
-  }, []);
-
-  const ProjectList = Projects?.projectList?.map((project) => {
+const ProjectList = ({ projects }: any) => {
+  const ProjectList = projects.map((project: ProjectProps) => {
     return <ProjectItemContainer project={project} key={project.id} />;
   });
 

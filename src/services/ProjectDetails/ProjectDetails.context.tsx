@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext } from "react";
 import { AuthContext } from "../Auth/Auth.context";
-import { serviceFetchProject } from "./ProjectDetails.service";
+import { fetchProjectDetails } from "./ProjectDetails.service";
 
 interface projectContextProps {
   isLoading: boolean;
@@ -24,7 +24,7 @@ export const ProjectDetailsContextProvider = ({ children }: Props) => {
   const FetchProjectDetails = async (id: string) => {
     setIsLoading(false);
     try {
-      const res = await serviceFetchProject(
+      const res = await fetchProjectDetails(
         id,
         authUser?.authUser?.access_token
       );

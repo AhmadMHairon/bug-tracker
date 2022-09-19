@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Backdrop, Modal, Fade } from "@mui/material";
 import styled from "@emotion/styled";
-import CreateProjectForm from "./CreateProjectForm";
+import AddScenarioForm from "./AddScenarioForm";
 
 const ModalContainer = styled(Box)`
   position: absolute;
@@ -30,7 +30,7 @@ interface ProjectModalProps {
   submitHandler: any;
 }
 
-const ProjectModal = ({
+const AddScenarioModal = ({
   open,
   handleClose,
   submitHandler,
@@ -52,11 +52,11 @@ const ProjectModal = ({
           <Header>
             <h2 id="transition-modal-title">Create Project</h2>
           </Header>
-          <CreateProjectForm submitHandler={submitHandler}></CreateProjectForm>
+          <AddScenarioForm submitHandler={submitHandler}></AddScenarioForm>
         </ModalContainer>
       </Fade>
     </Modal>
   );
 };
 
-export default ProjectModal;
+export default AddScenarioModal;

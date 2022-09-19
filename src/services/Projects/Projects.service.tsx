@@ -3,17 +3,13 @@ import axios from "axios";
 import { baseURL } from "../../components/utils/baseURL";
 
 export const fetchUserProjects = async (access_token?: string) => {
-  try {
-    const res = await axios.get(`${baseURL}/v1/projects/`, {
-      headers: {
-        Authorization: "Bearer " + access_token,
-      },
-      withCredentials: true,
-    });
-    return res.data;
-  } catch (e) {
-    console.log(e);
-  }
+  const res = await axios.get(`${baseURL}/v1/projects/`, {
+    headers: {
+      Authorization: "Bearer " + access_token,
+    },
+    withCredentials: true,
+  });
+  return res.data;
 };
 
 export const createNewProject = async (

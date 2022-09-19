@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { Box, Button, Divider } from "@mui/material";
 import ProjectList from "../components/DashBoard/ProjectList";
 import ProjectsDetailsContainer from "../components/DashBoard/ProjectsDetailsContainer";
 import ProjectModal from "../components/projectModal/ProjectModal";
+import {
+  createNewProject,
+  fetchUserProjects,
+} from "../services/Projects/Projects.service";
+import { AuthContext } from "../services/Auth/Auth.context";
 
 const Container = styled(Box)`
   width: 100%;
@@ -26,24 +31,63 @@ const ProjectShowContainer = styled(Box)`
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 `;
 
+interface ProjectProps {
+  image: any;
+  name: string;
+  description: string;
+  id: string;
+}
+
 const DashBoardPage = () => {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [projects, setProjects] = useState<ProjectProps | null>(null);
+  const authUser = useContext(AuthContext);
+
+  useEffect(() => {
+    const fetcher = async () => {
+      try {
+        const data = await fetchUserProjects(authUser?.authUser?.access_token);
+        console.log("data", data);
+        setProjects(data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetcher();
+  }, [authUser?.authUser?.access_token]);
+
+  const submitHandler = async (data: any) => {
+    try {
+      await createNewProject(
+        {
+          name: data.name,
+          image: data.image[0],
+          description: data.description,
+        },
+        authUser?.authUser?.access_token
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Container>
       <CreateButtonContianer>
-        <Button variant="contained" onClick={handleOpen}>
+        <Button variant="contained" onClick={() => setOpen(true)}>
           Add Project
         </Button>
       </CreateButtonContianer>
       <Divider />
       <ProjectShowContainer>
         <ProjectsDetailsContainer></ProjectsDetailsContainer>
-        <ProjectList></ProjectList>
+        {projects && <ProjectList projects={projects}></ProjectList>}
       </ProjectShowContainer>
-      <ProjectModal open={open} handleClose={handleClose}></ProjectModal>
+      <ProjectModal
+        open={open}
+        handleClose={() => setOpen(false)}
+        submitHandler={submitHandler}
+      ></ProjectModal>
     </Container>
   );
 };

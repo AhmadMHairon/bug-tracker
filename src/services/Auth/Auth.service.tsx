@@ -1,8 +1,5 @@
 import axios from "axios";
-// import { baseURL } from "../components/utils/baseURL";
-
-const baseURL =
-  "https://0283-2001-16a2-de2d-2500-edec-addf-3caf-2e6e.in.ngrok.io";
+import { baseURL } from "../../components/utils/baseURL";
 
 interface loginProps {
   email: string;
@@ -16,7 +13,7 @@ interface registerProps {
 }
 
 export const login = async (data: loginProps) => {
-  const res = await axios.post(`${baseURL}/api/login`, {
+  const res = await axios.post(`${baseURL}/login`, {
     email: data.email,
     password: data.password,
   });
@@ -25,7 +22,7 @@ export const login = async (data: loginProps) => {
 
 export const fetchUser = async (token: string) => {
   console.log("Bearer " + token);
-  const res = await axios.get(`${baseURL}/api/my-profile`, {
+  const res = await axios.get(`${baseURL}/my-profile`, {
     headers: {
       Authorization: "Bearer " + token,
     },
@@ -36,7 +33,7 @@ export const fetchUser = async (token: string) => {
 };
 
 export const register = async (data: registerProps) => {
-  const res = await axios.post(`${baseURL}/api/register`, {
+  const res = await axios.post(`${baseURL}/register`, {
     name: data.name,
     password: data.password,
     email: data.email,

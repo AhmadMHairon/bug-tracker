@@ -47,7 +47,7 @@ function App() {
               <Route path="settings" element={<SettingsPage></SettingsPage>} />
               <Route path="profile" element={<ProfilePage></ProfilePage>} />
               <Route
-                path="projects/:id"
+                path="projects/:project_id"
                 element={<ProjectDetailPage></ProjectDetailPage>}
               />
             </Route>
