@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchProjectDetails } from "../services/ProjectDetails/ProjectDetails.service";
 import { Box, Typography, TextField, Button, Divider } from "@mui/material";
 import styled from "@emotion/styled";
 import { AuthContext } from "../services/Auth/Auth.context";
 import ScenariosListContainer from "../components/scenarios/ScenariosListContainer";
+import AddScenarioModal from "../components/scenarios/AddScenarioModal";
+import AssignMemberModal from "../components/AssignMembers/AssignMemberModal";
+import { serviceCreateScenario } from "../services/Senerios/Senerios.service";
+import { fetchProjectDetails } from "../services/Projects/Projects.service";
 
 const Container = styled(Box)`
   height: 100%;
@@ -68,6 +71,9 @@ const ProjectDetailPage = () => {
   const { project_id } = useParams<{ project_id: string }>();
   const authUser = useContext(AuthContext);
 
+  const [showScenarioModal, setShowScenarioModal] = useState(false);
+  const [showMemberModal, setShowMemberModal] = useState(false);
+
   useEffect(() => {
     const fetchItem = async () => {
       try {
@@ -82,11 +88,27 @@ const ProjectDetailPage = () => {
           navigate("/portal");
         }
       } catch (e) {
-        console.log();
+        console.log(e);
       }
     };
     fetchItem();
   }, [project_id, navigate, authUser?.authUser?.access_token]);
+
+  const addScenarioSubmitHandler = async (data: any) => {
+    try {
+      console.log("Check this again");
+      if (project_id) {
+        const res = await serviceCreateScenario(
+          data,
+          project_id,
+          authUser?.authUser?.access_token
+        );
+        console.log(res);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Container>
@@ -105,12 +127,29 @@ const ProjectDetailPage = () => {
           </HeaderNameAndDescription>
         </HeaderDetails>
         <ButtonsContianer>
-          <Button variant="contained">Add Members</Button>
-          <Button variant="contained">Add Scenarios</Button>
+          <Button onClick={() => setShowMemberModal(true)} variant="contained">
+            Add Members
+          </Button>
+          <Button
+            onClick={() => setShowScenarioModal(true)}
+            variant="contained"
+          >
+            Add Scenarios
+          </Button>
         </ButtonsContianer>
       </HeaderContainer>
       <Divider></Divider>
       <ScenariosListContainer></ScenariosListContainer>
+      <AssignMemberModal
+        open={showMemberModal}
+        handleClose={() => setShowMemberModal(false)}
+        submitHandler={() => console.log("meow")}
+      ></AssignMemberModal>
+      <AddScenarioModal
+        open={showScenarioModal}
+        handleClose={() => setShowScenarioModal(false)}
+        submitHandler={addScenarioSubmitHandler}
+      ></AddScenarioModal>
     </Container>
   );
 };

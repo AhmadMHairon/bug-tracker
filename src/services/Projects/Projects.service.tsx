@@ -20,16 +20,70 @@ export const createNewProject = async (
   },
   access_token?: string
 ) => {
-  try {
-    const res = await axios.post(`${baseURL}/v1/projects/create`, data, {
+  const res = await axios.post(`${baseURL}/v1/projects/create`, data, {
+    headers: {
+      Authorization: "Bearer " + access_token,
+      "Content-Type": "multipart/form-data",
+    },
+    withCredentials: true,
+  });
+  return res.data;
+};
+
+export const fetchProjectDetails = async (
+  project_id: string,
+  access_token?: string
+) => {
+  const res = await axios.get(`${baseURL}/v1/projects/show/${project_id}`, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+    withCredentials: true,
+  });
+  return res.data;
+};
+
+export const updatingProjectDetails = async (
+  data: any,
+  project_id: string,
+  access_token?: string
+) => {
+  const res = await axios.put(
+    `${baseURL}/v1/projects/update/${project_id}`,
+    data,
+    {
       headers: {
-        Authorization: "Bearer " + access_token,
-        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${access_token}`,
       },
       withCredentials: true,
-    });
-    return res.data;
-  } catch (e) {
-    console.log(e);
-  }
+    }
+  );
+  return res.data;
 };
+
+export const deleteProjectDetails = async (
+  project_id: string,
+  access_token?: string
+) => {
+  const res = await axios.delete(`${baseURL}/v1/projects/delete/${project_id}`, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+    withCredentials: true,
+  });
+  return res.data;
+};
+
+// export const serviceAssignMember = async (
+//   data: {
+//     user_id: string;
+//     project_id: string;
+//   },
+//   id?: string
+// ) => {
+//   const res = await axios.post(
+//     `${baseURL}/projects/${id}/assign-member/`,
+//     data
+//   );
+//   return res.data;
+// };
