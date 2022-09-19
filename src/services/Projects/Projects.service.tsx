@@ -9,7 +9,7 @@ export const fetchUserProjects = async (access_token?: string) => {
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const createNewProject = async (
@@ -27,7 +27,7 @@ export const createNewProject = async (
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const fetchProjectDetails = async (
@@ -40,7 +40,7 @@ export const fetchProjectDetails = async (
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const updatingProjectDetails = async (
@@ -58,32 +58,21 @@ export const updatingProjectDetails = async (
       withCredentials: true,
     }
   );
-  return res.data;
+  return res.data.data;
 };
 
 export const deleteProjectDetails = async (
   project_id: string,
   access_token?: string
 ) => {
-  const res = await axios.delete(`${baseURL}/v1/projects/delete/${project_id}`, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-    withCredentials: true,
-  });
-  return res.data;
+  const res = await axios.delete(
+    `${baseURL}/v1/projects/delete/${project_id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+      withCredentials: true,
+    }
+  );
+  return res.data.data;
 };
-
-// export const serviceAssignMember = async (
-//   data: {
-//     user_id: string;
-//     project_id: string;
-//   },
-//   id?: string
-// ) => {
-//   const res = await axios.post(
-//     `${baseURL}/projects/${id}/assign-member/`,
-//     data
-//   );
-//   return res.data;
-// };

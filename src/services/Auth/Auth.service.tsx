@@ -17,7 +17,7 @@ export const login = async (data: loginProps) => {
     email: data.email,
     password: data.password,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const fetchUser = async (token: string) => {
@@ -28,8 +28,7 @@ export const fetchUser = async (token: string) => {
     },
     withCredentials: true,
   });
-  console.log(res.data);
-  return res.data;
+  return res.data.data;
 };
 
 export const register = async (data: registerProps) => {
@@ -39,5 +38,5 @@ export const register = async (data: registerProps) => {
     email: data.email,
   });
 
-  return res.data;
+  return res.data.data;
 };

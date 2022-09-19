@@ -8,7 +8,7 @@ export const serviceFetchAllTests = async (access_token?: string) => {
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceCreateTest = async (data: any, access_token?: string) => {
@@ -18,7 +18,7 @@ export const serviceCreateTest = async (data: any, access_token?: string) => {
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceFetchTestDetails = async (
@@ -31,7 +31,7 @@ export const serviceFetchTestDetails = async (
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceUpdateTestDetails = async (
@@ -45,7 +45,7 @@ export const serviceUpdateTestDetails = async (
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceDeleteTestDetails = async (
@@ -58,5 +58,5 @@ export const serviceDeleteTestDetails = async (
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };

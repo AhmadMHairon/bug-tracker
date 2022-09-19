@@ -3,8 +3,10 @@ import { login, register, fetchUser } from "./Auth.service";
 
 interface authUserProps {
   access_token: string;
+  email: string;
   name: string;
-  admin: boolean;
+  is_admin: boolean;
+  id: number;
 }
 
 interface authContextProps {
@@ -33,8 +35,10 @@ interface Props {
 export const AuthContext = createContext<authContextProps | null>(null);
 
 export const AuthContextProvider = ({ children }: Props) => {
-  const [authUser, setAuthUser] = useState(null);
+  const [authUser, setAuthUser] = useState<authUserProps | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  console.log("authUser", authUser);
 
   const loginUser = async (data: loginProps) => {
     try {
@@ -58,7 +62,7 @@ export const AuthContextProvider = ({ children }: Props) => {
       if (token) {
         try {
           const res = await fetchUser(token);
-          setAuthUser({ ...res.data, access_token: token });
+          setAuthUser({ ...res, access_token: token });
         } catch (e) {
           console.log("error", e);
         }

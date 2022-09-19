@@ -3,11 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Box, Typography, TextField, Button, Divider } from "@mui/material";
 import styled from "@emotion/styled";
 import { AuthContext } from "../services/Auth/Auth.context";
-import ScenariosListContainer from "../components/scenarios/ScenariosListContainer";
-import AddScenarioModal from "../components/scenarios/AddScenarioModal";
-import AssignMemberModal from "../components/AssignMembers/AssignMemberModal";
-import { serviceCreateScenario } from "../services/Senerios/Senerios.service";
-import { fetchProjectDetails } from "../services/Projects/Projects.service";
+import { serviceFetchScenarioDetails } from "../services/Senerios/Senerios.service";
+import { serviceCreateAction } from "../services/Actions/Action.service";
+import AddActionModal from "../components/scenarios/AddActionModal";
+import ActionsListContainer from "../components/Actions/ActionsListContainer";
+import { serviceFetchStepDetails } from "../services/Step/Step.service";
 
 const Container = styled(Box)`
   height: 100%;
@@ -65,50 +65,59 @@ const ButtonsContianer = styled(Box)`
   }
 `;
 
-const ProjectDetailPage = () => {
+const StepDetailsPage = () => {
   const navigate = useNavigate();
-  const [projectDetails, setProjectDetails] = useState<any>({});
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { project_id } = useParams<{ project_id: string }>();
+  const [stepDetails, setStepDetails] = useState<any>({});
+  const { project_id, scenario_id, action_id, step_id } = useParams<{
+    project_id: string;
+    scenario_id: string;
+    action_id: string;
+    step_id: string;
+  }>();
   const authUser = useContext(AuthContext);
-
-  const [showScenarioModal, setShowScenarioModal] = useState(false);
-  const [showMemberModal, setShowMemberModal] = useState(false);
+  const [showAddTest, setShowAddTest] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const fetchItem = async () => {
+    const fetcher = async () => {
       setIsLoading(true);
       try {
-        if (project_id) {
-          const item = await fetchProjectDetails(
-            project_id,
+        if (project_id && scenario_id && action_id && step_id) {
+          const item = await serviceFetchStepDetails(
+            step_id,
             authUser?.authUser?.access_token
           );
           console.log(item);
-          setProjectDetails(item);
+          setStepDetails(item);
         } else {
           navigate("/portal");
         }
       } catch (e) {
-        navigate("/portal");
         console.log(e);
       }
       setIsLoading(false);
     };
-    fetchItem();
-  }, [project_id, navigate, authUser?.authUser?.access_token]);
+    fetcher();
+  }, [
+    authUser?.authUser?.access_token,
+    scenario_id,
+    project_id,
+    navigate,
+    action_id,
+    step_id,
+  ]);
 
-  const addScenarioSubmitHandler = async (data: any) => {
+  const addActionSubmitHandler = async (data: any) => {
     try {
       if (project_id) {
-        const res = await serviceCreateScenario(
+        const res = await serviceCreateAction(
           data,
           project_id,
           authUser?.authUser?.access_token
         );
-        setProjectDetails((prev: any) => ({
+        setStepDetails((prev: any) => ({
           ...prev,
-          scenarios: [...prev.scenarios, res[0]],
+          tests: [...prev.tests, res[0]],
         }));
       }
     } catch (e) {
@@ -132,41 +141,28 @@ const ProjectDetailPage = () => {
             ></img>
           </ImageContainer>
           <HeaderNameAndDescription>
-            <HeaderName>{projectDetails?.name}</HeaderName>
-            <HeaderDescription>{projectDetails?.description}</HeaderDescription>
+            <HeaderName>{stepDetails?.name}</HeaderName>
+            <HeaderDescription>{stepDetails?.description}</HeaderDescription>
           </HeaderNameAndDescription>
         </HeaderDetails>
         <ButtonsContianer>
-          <Button onClick={() => setShowMemberModal(true)} variant="contained">
-            Add Members
-          </Button>
-          <Button
-            onClick={() => setShowScenarioModal(true)}
-            variant="contained"
-          >
-            Add Scenarios
+          <Button onClick={() => setShowAddTest(true)} variant="contained">
+            Add Actions
           </Button>
         </ButtonsContianer>
       </HeaderContainer>
       <Divider></Divider>
-      {projectDetails.scenarios && (
-        <ScenariosListContainer
-          scenarios={projectDetails.scenarios}
-        ></ScenariosListContainer>
-      )}
+      {/* {stepDetails.tests && (
+        <TestsListContainer tests={stepDetails.steps}></TestsListContainer>
+      )} */}
 
-      <AssignMemberModal
-        open={showMemberModal}
-        handleClose={() => setShowMemberModal(false)}
-        submitHandler={() => console.log("meow")}
-      ></AssignMemberModal>
-      <AddScenarioModal
-        open={showScenarioModal}
-        handleClose={() => setShowScenarioModal(false)}
-        submitHandler={addScenarioSubmitHandler}
-      ></AddScenarioModal>
+      <AddActionModal
+        open={showAddTest}
+        handleClose={() => setShowAddTest(false)}
+        submitHandler={addActionSubmitHandler}
+      ></AddActionModal>
     </Container>
   );
 };
 
-export default ProjectDetailPage;
+export default StepDetailsPage;

@@ -8,20 +8,18 @@ export const serviceFetchAllUsers = async (access_token?: string) => {
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
-
-
-export const serviceCreateUser = async (data: any, access_token?: string) =>{
+export const serviceCreateUser = async (data: any, access_token?: string) => {
   const res = await axios.post(`${baseURL}/v1/users/create`, data, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
     withCredentials: true,
   });
-  return res.data;
-}
+  return res.data.data;
+};
 
 export const serviceFetchUserDetails = async (
   user_id?: string,
@@ -33,7 +31,7 @@ export const serviceFetchUserDetails = async (
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceUpdateUserDetails = async (
@@ -47,8 +45,8 @@ export const serviceUpdateUserDetails = async (
     },
     withCredentials: true,
   });
-  return res.data;
-}
+  return res.data.data;
+};
 
 export const serviceDeleteUserDetails = async (
   user_id?: string,
@@ -60,6 +58,5 @@ export const serviceDeleteUserDetails = async (
     },
     withCredentials: true,
   });
-  return res.data;
-}
-
+  return res.data.data;
+};

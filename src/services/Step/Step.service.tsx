@@ -11,13 +11,21 @@ export const serviceFetchAllSteps = async (access_token?: string) => {
   return res.data;
 };
 
-export const serviceCreateStep = async (data: any, access_token?: string) => {
-  const res = await axios.post(`${baseURL}/v1/steps/create`, data, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-    withCredentials: true,
-  });
+export const serviceCreateStep = async (
+  data: any,
+  action_id: string,
+  access_token?: string
+) => {
+  const res = await axios.post(
+    `${baseURL}/v1/steps/create/${action_id}`,
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+      withCredentials: true,
+    }
+  );
   return res.data;
 };
 

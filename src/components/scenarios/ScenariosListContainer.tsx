@@ -8,12 +8,12 @@ const Container = styled(Box)`
   border: 1px solid green;
 `;
 
-const ScenariosListContainer = () => {
-  return (
-    <Container>
-      <ScenarioItemContainer />
-    </Container>
-  );
+const ScenariosListContainer = ({ scenarios }: any) => {
+  console.log("scenarios", scenarios);
+  const list = scenarios.map((e: any) => (
+    <ScenarioItemContainer scenario={e} key={e.id}></ScenarioItemContainer>
+  ));
+  return <Container>{list}</Container>;
 };
 
 export default ScenariosListContainer;

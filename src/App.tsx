@@ -12,7 +12,9 @@ import AdminsPage from "./pages/AdminsPage";
 import SettingsPage from "./pages/SettingsPage";
 import ProfilePage from "./pages/ProfilePage";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
-import ScenarioPage from "./pages/ScenarioPage";
+import ScenarioDetailsPage from "./pages/ScenarioDetailsPage";
+import ActionDetailsPage from "./pages/ActionDetailsPage";
+import StepDetailsPage from "./pages/StepDetailsPage";
 
 function App() {
   const theme = createTheme({
@@ -39,25 +41,32 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routes>
-          {/* <Route path="" element={<ProtectedRoute></ProtectedRoute>}> */}
-          <Route path="" element={<Navigate to={"/portal"} replace />} />
-          <Route path="/portal" element={<SideMenu></SideMenu>}>
-            <Route path="" element={<DashBoardPage></DashBoardPage>} />
-            <Route path="users" element={<UsersPage></UsersPage>} />
-            <Route path="admins" element={<AdminsPage></AdminsPage>} />
-            <Route path="settings" element={<SettingsPage></SettingsPage>} />
-            <Route path="profile" element={<ProfilePage></ProfilePage>} />
-            <Route
-              path="projects/:project_id"
-              element={<ProjectDetailPage></ProjectDetailPage>}
-            />
-            <Route
-              path="projects/:project_id/scenarios/:scenario_id"
-              element={<ScenarioPage></ScenarioPage>}
-            />
+          <Route path="" element={<ProtectedRoute></ProtectedRoute>}>
+            <Route path="" element={<Navigate to={"/portal"} replace />} />
+            <Route path="/portal" element={<SideMenu></SideMenu>}>
+              <Route path="" element={<DashBoardPage></DashBoardPage>} />
+              <Route path="users" element={<UsersPage></UsersPage>} />
+              <Route path="admins" element={<AdminsPage></AdminsPage>} />
+              <Route path="settings" element={<SettingsPage></SettingsPage>} />
+              <Route path="profile" element={<ProfilePage></ProfilePage>} />
+              <Route
+                path="projects/:project_id"
+                element={<ProjectDetailPage></ProjectDetailPage>}
+              />
+              <Route
+                path="projects/:project_id/scenarios/:scenario_id"
+                element={<ScenarioDetailsPage></ScenarioDetailsPage>}
+              />
+              <Route
+                path="projects/:project_id/scenarios/:scenario_id/actions/:action_id"
+                element={<ActionDetailsPage></ActionDetailsPage>}
+              />
+              <Route
+                path="projects/:project_id/scenarios/:scenario_id/actions/:action_id/steps/:step_id"
+                element={<StepDetailsPage></StepDetailsPage>}
+              />
+            </Route>
           </Route>
-
-          {/* </Route> */}
           <Route
             path=""
             element={

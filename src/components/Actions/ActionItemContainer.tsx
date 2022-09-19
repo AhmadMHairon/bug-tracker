@@ -85,20 +85,20 @@ const MyLink = styled(Link)`
   text-decoration: none;
 `;
 
-const ScenarioItemContainer = ({ scenario }: any) => {
+const ActionItemContainer = ({ action }: any) => {
   return (
     <Container>
       <ProjecDetailsContainer>
         <ProjectDetails>
           <TitleDesContainer>
-            <Title>{scenario.name}</Title>
-            <Description>{scenario.description}</Description>
+            <Title>{action.name}</Title>
+            <Description>{action.description}</Description>
           </TitleDesContainer>
         </ProjectDetails>
       </ProjecDetailsContainer>
       <UrgentToken>Urgent</UrgentToken>
       <ProjectExtra>
-        <MyLink to={`scenarios/${scenario.id}`}>
+        <MyLink to={`actions/${action.id}`}>
           <Button variant="contained" color="error">
             View Project
           </Button>
@@ -108,4 +108,4 @@ const ScenarioItemContainer = ({ scenario }: any) => {
   );
 };
 
-export default ScenarioItemContainer;
+export default ActionItemContainer;
