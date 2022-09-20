@@ -8,7 +8,7 @@ export const serviceFetchAllSteps = async (access_token?: string) => {
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceCreateStep = async (
@@ -26,7 +26,7 @@ export const serviceCreateStep = async (
       withCredentials: true,
     }
   );
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceFetchStepDetails = async (
@@ -39,7 +39,7 @@ export const serviceFetchStepDetails = async (
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceUpdateStepDetails = async (
@@ -53,7 +53,7 @@ export const serviceUpdateStepDetails = async (
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceDeleteStepDetails = async (
@@ -66,5 +66,5 @@ export const serviceDeleteStepDetails = async (
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };

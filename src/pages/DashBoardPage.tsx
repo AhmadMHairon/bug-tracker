@@ -47,7 +47,6 @@ const DashBoardPage = () => {
     const fetcher = async () => {
       try {
         const data = await fetchUserProjects(authUser?.authUser?.access_token);
-        console.log("data", data);
         setProjects(data);
       } catch (e) {
         console.log(e);
@@ -58,7 +57,7 @@ const DashBoardPage = () => {
 
   const submitHandler = async (data: any) => {
     try {
-      await createNewProject(
+      const res = await createNewProject(
         {
           name: data.name,
           image: data.image[0],
@@ -66,6 +65,8 @@ const DashBoardPage = () => {
         },
         authUser?.authUser?.access_token
       );
+
+      setProjects((prev: any) => prev.concat(res));
     } catch (e) {
       console.log(e);
     }

@@ -22,12 +22,15 @@ export const login = async (data: loginProps) => {
 
 export const fetchUser = async (token: string) => {
   console.log("Bearer " + token);
+
   const res = await axios.get(`${baseURL}/my-profile`, {
     headers: {
       Authorization: "Bearer " + token,
     },
     withCredentials: true,
   });
+  console.log("res", res.data.data);
+
   return res.data.data;
 };
 

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Box, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import ItemContainerButton from "../features/ItemContainerButton";
 
 const Container = styled(Box)`
   border: 1px solid red;
@@ -77,12 +78,31 @@ const ProjectExtra = styled(Box)`
   padding: 0 10px;
   padding-bottom: 5px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 `;
 
 const MyLink = styled(Link)`
   text-decoration: none;
+`;
+
+const MyButton = styled.button`
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 2px;
+  border-radius: 10px;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 200ms ease-in-out;
+  align-items: center;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const ButtonsContainer = styled(Box)`
+  display: flex;
+  align-items: center;
 `;
 
 const ProjectItemContainer = ({ project }: any) => {
@@ -109,6 +129,10 @@ const ProjectItemContainer = ({ project }: any) => {
       </ProjecDetailsContainer>
       <UrgentToken>Urgent</UrgentToken>
       <ProjectExtra>
+        <ItemContainerButton
+          ModalID={project.id}
+          ModalName={"PROJECT"}
+        ></ItemContainerButton>
         <MyLink to={`projects/${project.id}`}>
           <Button variant="contained" color="error">
             View Project

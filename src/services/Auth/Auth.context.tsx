@@ -75,7 +75,8 @@ export const AuthContextProvider = ({ children }: Props) => {
   const registerUser = async (data: registerProps) => {
     try {
       const res = await register(data);
-      setAuthUser({ ...res, email: data.email });
+      setAuthUser({ ...res, email: data.email, name: data.name });
+      console.log(res);
       localStorage.setItem("token", res.access_token);
     } catch (e) {
       console.log("error", e);

@@ -8,7 +8,7 @@ export const serviceFetchAllScenarios = async (access_token?: string) => {
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceCreateScenario = async (
@@ -25,7 +25,7 @@ export const serviceCreateScenario = async (
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceFetchScenarioDetails = async (
@@ -38,7 +38,7 @@ export const serviceFetchScenarioDetails = async (
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceUpdateScenarioDetails = async (
@@ -56,7 +56,7 @@ export const serviceUpdateScenarioDetails = async (
       withCredentials: true,
     }
   );
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceDeleteScenarioDetails = async (
@@ -72,5 +72,5 @@ export const serviceDeleteScenarioDetails = async (
       withCredentials: true,
     }
   );
-  return res.data;
+  return res.data.data;
 };

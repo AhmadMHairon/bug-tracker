@@ -8,7 +8,7 @@ export const serviceFetchAllActions = async (access_token?: string) => {
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceCreateAction = async (
@@ -29,7 +29,7 @@ export const serviceCreateAction = async (
       withCredentials: true,
     }
   );
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceFetchActionDetails = async (
@@ -42,7 +42,7 @@ export const serviceFetchActionDetails = async (
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceUpdateActionDetails = async (
@@ -60,7 +60,7 @@ export const serviceUpdateActionDetails = async (
       withCredentials: true,
     }
   );
-  return res.data;
+  return res.data.data;
 };
 
 export const serviceDeleteActionDetails = async (
@@ -73,5 +73,5 @@ export const serviceDeleteActionDetails = async (
     },
     withCredentials: true,
   });
-  return res.data;
+  return res.data.data;
 };
